@@ -1,6 +1,6 @@
 
 # Cryo 
-An AES file encryptor and decryptor.
+An AES file encryptor and decryptor class library.
 
 Since this is a little coding project for myself, 
 no guarantee this is perfect security. 
