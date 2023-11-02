@@ -9,10 +9,10 @@ namespace Cryo {
         // Used to create Keys and IVs.
         // Keys: 16, 24 or 32
         // IV: 16 (ONLY)
-        public byte[] GenerateBytes(string passkey, int size)
+        public byte[] GenerateBytes(string password, int size)
         {
             byte[] result = new byte[size];
-            byte[] bytes = Encoding.ASCII.GetBytes(passkey);
+            byte[] bytes = Encoding.ASCII.GetBytes(password);
             int length = bytes.Length;
 
             for (int i = 0; i < result.Length; i++)
