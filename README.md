@@ -35,7 +35,7 @@ byte[] IV = pros.GenerateBytes(MyPassword, 16);
 Encrypt(string filePath, byte[] Key, byte[] IV);
 Decrypt(string filePath, byte[] Key, byte[] IV);
 
-// filePath: the path to the file you want to encrypt
+// filePath: the path to the file you want to encrypt/decrypt
 // Key: A 16, 24 or 32 byte array.
 // IV: A 16 byte array.
 ~~~
