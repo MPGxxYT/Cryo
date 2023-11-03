@@ -6,30 +6,31 @@ Since this is a little coding project for myself,
 no guarantee this is perfect security. 
 But I think it's pretty good though.
 
-This class has a built in byte array generator based on passwords. 
-It's rudimentary but it works. You don't need to use it if you don't like.
+I created a password SHA265 Hashing Method. It should work fine.
+Use it if you'd like.
+
 ## Byte Array Generator
 ~~~csharp  
-// GenerateBytes(string password, int size);
+// GenerateBytes(string password, ByteType type);
 
 // password is obvious: the password you'd like to use
-// size: is the amount of bytes you'd like to use.
-// !!NOTE!! IVs can ONLY BE 16bytes.
-// Keys can be 16, 24 or 32bytes.
+// ByteType is: Type of byte you want to generate
+// ByteType.Key for Key
+// ByteType.IV for IV
 
 Processor pros = new();
 string password = "MyPassword";
 
 // Generates a 32byte array based on the password.
-byte[] Key = pros.GenerateBytes(MyPassword, 32);
+byte[] Key = pros.GenerateBytes(password, ByteType.Key);
 
 // Generates a 16byte array based on the password.
-byte[] IV = pros.GenerateBytes(MyPassword, 16);
+byte[] IV = pros.GenerateBytes(password, ByteType.IV);
 
 // These will be used when encrypting and decrypting.
 ~~~  
 
-## Methods
+## Main Methods
 
 ~~~csharp  
 Encrypt(string filePath, byte[] Key, byte[] IV);

@@ -1,34 +1,40 @@
-﻿using System.Security.Cryptography;
+﻿using System.Runtime.Intrinsics.Arm;
+using System.Security.Cryptography;
 using System.Text;
+using Aes = System.Security.Cryptography.Aes;
 
 namespace Cryo {
 
+    public enum ByteType
+    {
+        Key,
+        IV
+    }
+
     public class Processor
     {
+
         // Method for generating bytes based off of a passkey
         // Used to create Keys and IVs.
-        // Keys: 16, 24 or 32
-        // IV: 16 (ONLY)
-        public byte[] GenerateBytes(string password, int size)
-        {
-            byte[] result = new byte[size];
-            byte[] bytes = Encoding.ASCII.GetBytes(password);
-            int length = bytes.Length;
+        // Use ByteType.Key for Keys
+        // Use ByteType.IV for IVs
+        public byte[] GenerateBytes(string password, ByteType type) {
 
-            for (int i = 0; i < result.Length; i++)
-            {
-                if (i < length) 
-                {
-                    result[i] = bytes[i];
-                } else {
-                    if (i - length < length)
-                    {
-                        result[i] = bytes[i - length];
-                    }
-                }
+                byte[] bytes = Encoding.ASCII.GetBytes(password);
+                SHA256 sha256 = SHA256.Create();
+                byte[] hash = sha256.ComputeHash(bytes);
+
+            if (type == ByteType.Key) {
+                return hash;
+            } 
+
+            if (type == ByteType.IV) {
+                byte[] iv = new byte[16];
+                Array.Copy(hash, iv, 16);
+                return iv;
             }
 
-            return result;
+            return new byte[1];
         }
         
         // Will create an encrypted copy of the file path.
