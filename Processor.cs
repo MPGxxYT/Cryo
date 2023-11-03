@@ -5,11 +5,7 @@ using Aes = System.Security.Cryptography.Aes;
 
 namespace Cryo {
 
-    public enum ByteType
-    {
-        Key,
-        IV
-    }
+    public enum ByteType { Key, IV }
 
     public class Processor
     {
